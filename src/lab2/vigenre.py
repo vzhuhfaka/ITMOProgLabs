@@ -26,14 +26,14 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
         unicode_index = ord(symbol)
         if symbol in alphabet or symbol in alphabet.upper():
             if symbol in alphabet:
-                shift = ord(fill_str(keyword, len(plaintext))[symbol_index]) - 97
+                shift = ord(fill_str(keyword.lower(), len(plaintext))[symbol_index]) - 97
                 if unicode_index + shift > 122:
                     unicode_index = unicode_index + shift - 26
                 else:
                     unicode_index += shift
                 ciphertext += chr(unicode_index)
             else:
-                shift = ord(fill_str(keyword, len(plaintext))[symbol_index]) - 65
+                shift = abs(ord(fill_str(keyword.upper(), len(plaintext))[symbol_index]) - 65)
                 if unicode_index + shift > 90:
                     unicode_index = unicode_index + shift - 26
                 else:
@@ -43,8 +43,6 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
             ciphertext += chr(unicode_index)
 
     return ciphertext
-
-print(encrypt_vigenere('Hello world!', 'dnj'))
 
 def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     """
@@ -64,14 +62,14 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
         unicode_index = ord(symbol)
         if symbol in alphabet or symbol in alphabet.upper():
             if symbol in alphabet:
-                shift = ord(fill_str(keyword, len(ciphertext))[symbol_index]) - 97
+                shift = ord(fill_str(keyword.lower(), len(ciphertext))[symbol_index]) - 97
                 if unicode_index - shift < 97:
                     unicode_index = unicode_index - shift + 26
                 else:
                     unicode_index -= shift
                 plaintext += chr(unicode_index)
             else:
-                shift = ord(fill_str(keyword, len(ciphertext))[symbol_index]) - 65
+                shift = ord(fill_str(keyword.upper(), len(ciphertext))[symbol_index]) - 65
                 if unicode_index - shift < 65:
                     unicode_index = unicode_index - shift + 26
                 else:
