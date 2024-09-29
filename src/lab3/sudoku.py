@@ -41,7 +41,18 @@ def group(values: tp.List[T], n: int) -> tp.List[tp.List[T]]:
     >>> group([1,2,3,4,5,6,7,8,9], 3)
     [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     """
-    pass
+    result_matrix = []
+    counter = 0
+    element_matrix = []
+    for i in values:
+        element_matrix.append(i)
+        counter += 1
+        if counter == n:
+            result_matrix.append(element_matrix)
+            counter = 0
+            element_matrix = []
+
+    return result_matrix
 
 
 def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
