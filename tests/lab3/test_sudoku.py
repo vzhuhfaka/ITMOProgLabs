@@ -1,5 +1,5 @@
 import unittest
-from src.lab3.sudoku import group, get_row, get_col, get_block
+from src.lab3.sudoku import group, get_row, get_col, get_block, find_empty_positions
 
 class SudokuTestCase(unittest.TestCase):
 
@@ -14,3 +14,6 @@ class SudokuTestCase(unittest.TestCase):
 
     def test_sudoku_get_block(self):
         self.assertEqual(get_block([['4', '2', '.'], ['.', '5', '1'], ['4', '.', '.']], (0, 0)), ['4', '2', '.', '.', '5', '1', '4', '.', '.'])
+
+    def test_sudoku_find_empty_positions(self):
+        self.assertEqual(find_empty_positions([['5', '5', '1'], ['.', '4', '2'], ['2', '.', '2']]), (1, 0))
