@@ -1,5 +1,6 @@
 import unittest
-from src.lab3.sudoku import group, get_row, get_col, get_block, find_empty_positions
+from src.lab3.sudoku import group, get_row, get_col, get_block, find_empty_positions, find_possible_values, read_sudoku
+
 
 class SudokuTestCase(unittest.TestCase):
 
@@ -17,3 +18,6 @@ class SudokuTestCase(unittest.TestCase):
 
     def test_sudoku_find_empty_positions(self):
         self.assertEqual(find_empty_positions([['5', '5', '1'], ['.', '4', '2'], ['2', '.', '2']]), (1, 0))
+
+    def test_sudoku_find_possible_values(self):
+        self.assertEqual(find_possible_values(read_sudoku('../../src/lab3/puzzle1.txt'), (1, 2)), {'2', '4', '7'})
