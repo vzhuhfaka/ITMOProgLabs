@@ -153,7 +153,6 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
     """
     empty_pos = find_empty_positions(grid)
     possible_values = find_possible_values(grid, empty_pos)
-    pass
 
 
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
