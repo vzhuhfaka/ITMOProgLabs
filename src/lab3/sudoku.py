@@ -1,6 +1,9 @@
 import pathlib
 import typing as tp
+import sys
+from tabnanny import check
 
+sys.setrecursionlimit(10000)
 T = tp.TypeVar("T")
 
 
@@ -139,8 +142,22 @@ def find_possible_values(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -
     return a
 
 
+def check_pos(grid, value, pos) -> bool:
+    """Проверим, можно ли поставить значение в указанную позицию по правилам Судоку."""
+
+    if value in get_row(grid, pos):
+        return False
+
+    if value in get_col(grid, pos):
+        return False
+
+    if value in get_block(grid, pos):
+        return False
+
+    return True
+
+
 def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
-    """ Решение пазла, заданного в grid """
     """ Как решать Судоку?
         1. Найти свободную позицию
         2. Найти все возможные значения, которые могут находиться на этой позиции
@@ -151,8 +168,26 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
     >>> solve(grid)
     [['5', '3', '4', '6', '7', '8', '9', '1', '2'], ['6', '7', '2', '1', '9', '5', '3', '4', '8'], ['1', '9', '8', '3', '4', '2', '5', '6', '7'], ['8', '5', '9', '7', '6', '1', '4', '2', '3'], ['4', '2', '6', '8', '5', '3', '7', '9', '1'], ['7', '1', '3', '9', '2', '4', '8', '5', '6'], ['9', '6', '1', '5', '3', '7', '2', '8', '4'], ['2', '8', '7', '4', '1', '9', '6', '3', '5'], ['3', '4', '5', '2', '8', '6', '1', '7', '9']]
     """
+    """ Решение пазла, заданного в grid """
+
     empty_pos = find_empty_positions(grid)
-    possible_values = find_possible_values(grid, empty_pos)
+
+    # Базовый случай: если нет пустых позиций, головоломка решена
+    if not empty_pos:
+        return grid
+
+    y, x = empty_pos
+
+    for value in map(str, range(1, 10)):
+        if check_pos(grid, value, (y, x)):
+            grid[y][x] = value  # Пробуем поставить значение
+
+            if solve(grid):  # Рекурсивный вызов для следующей позиции
+                return grid
+
+            grid[y][x] = '.'  # Откат действия (backtracking)
+
+    return None
 
 
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
