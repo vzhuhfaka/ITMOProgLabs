@@ -2,6 +2,7 @@ import pathlib
 import typing as tp
 import sys
 from tabnanny import check
+import random
 
 sys.setrecursionlimit(10000)
 T = tp.TypeVar("T")
@@ -229,8 +230,14 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
     >>> check_solution(solution)
     True
     """
-    pass
-
+    grid = [['.' for _ in range(9)] for _ in range(9)]
+    solve(grid)
+    filled_positions = [(i, j) for i in range(9) for j in range(9)]
+    random.shuffle(filled_positions)
+    for pos in filled_positions[N:]:
+        y, x = pos
+        grid[y][x] = '.'
+    return grid
 
 if __name__ == "__main__":
     for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
