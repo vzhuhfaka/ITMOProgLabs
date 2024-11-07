@@ -173,7 +173,7 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 
     empty_pos = find_empty_positions(grid)
 
-    # Базовый случай: если нет пустых позиций, головоломка решена
+    # Если Судоку уже решена
     if not empty_pos:
         return grid
 
@@ -181,12 +181,12 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 
     for value in map(str, range(1, 10)):
         if check_pos(grid, value, (y, x)):
-            grid[y][x] = value  # Пробуем поставить значение
+            grid[y][x] = value # Применяем действие
 
             if solve(grid):  # Рекурсивный вызов для следующей позиции
                 return grid
 
-            grid[y][x] = '.'  # Откат действия (backtracking)
+            grid[y][x] = '.'  # Откатываем действие
 
     return None
 
