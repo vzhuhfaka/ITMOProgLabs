@@ -179,7 +179,7 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 
     y, x = empty_pos
 
-    for value in map(str, range(1, 10)):
+    for value in find_possible_values(grid, empty_pos):
         if check_pos(grid, value, (y, x)):
             grid[y][x] = value # Применяем действие
 
