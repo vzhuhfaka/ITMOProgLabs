@@ -23,10 +23,10 @@ class SudokuTestCase(unittest.TestCase):
         self.assertEqual(find_empty_positions([['5', '5', '1'], ['.', '4', '2'], ['2', '.', '2']]), (1, 0))
 
     def test_sudoku_find_possible_values(self):
-        self.assertEqual(find_possible_values(read_sudoku('../../src/lab3/puzzle1.txt'), (1, 2)), {'2', '4', '7'})
+        self.assertEqual(find_possible_values(read_sudoku('src/lab3/puzzle1.txt'), (1, 2)), {'2', '4', '7'})
 
     def test_sudoku_solve(self):
-        self.assertEqual(solve(read_sudoku('../../src/lab3/puzzle1.txt')),
+        self.assertEqual(solve(read_sudoku('src/lab3/puzzle1.txt')),
                          [['5', '3', '4', '6', '7', '8', '9', '1', '2'], ['6', '7', '2', '1', '9', '5', '3', '4', '8'],
                           ['1', '9', '8', '3', '4', '2', '5', '6', '7'], ['8', '5', '9', '7', '6', '1', '4', '2', '3'],
                           ['4', '2', '6', '8', '5', '3', '7', '9', '1'], ['7', '1', '3', '9', '2', '4', '8', '5', '6'],
