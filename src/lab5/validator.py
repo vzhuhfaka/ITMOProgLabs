@@ -190,12 +190,12 @@ class Validator:
 
             if not check_phone_number(phone_number):
                 flag = False
-                error_string = f'{order_number};2;{phone_number if phone_number else 'no data'}'
+                error_string = f'{order_number};2;{phone_number if phone_number else "no data"}'
                 orders_invalid.append(error_string)
 
             if not check_address(address):
                 flag = False
-                error_string = f'{order_number};1;{address if address else 'no data'}'
+                error_string = f'{order_number};1;{address if address else "no data"}'
                 orders_invalid.append(error_string)
 
             products_dict = count_repetitive(products.split(', '))  # считаем количество повторяющихся продуктов
